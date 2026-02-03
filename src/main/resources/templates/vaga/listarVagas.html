@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang=”pt-br” xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>| RecHuman |</title>
+
+	<link rel="stylesheet" th:href="@{/bootstrap-5.3.3-dist/css/bootstrap.min.css}">
+	<script th:src="@{/jquery-3.7.1.min.js}"></script>
+	<script th:src="@{/bootstrap-5.3.3-dist/js/bootstrap.min.js}"></script>
+
+</head>
+
+<body>
+	
+	<div th:insert="fragments/publica-nave :: barSuperior"></div>
+
+
+	<div class="container">
+
+		<h1>Lista de vagas cadastradas</h1>
+		<div class="alert alert-success alert-dismissible fade show" th:if="${success}">
+			<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+			<span th:text="${success}"></span>
+		</div>
+		<div class="alert alert-warning alert-dismissible fade show" th:if="${warning}">
+			<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+			<span th:text="${warning}"></span>
+		</div>
+
+		<br>
+
+		<table class="table table-hover table-responsive w-auto table-striped">
+			<thead>
+				<tr>
+					<th scope="col">Nome da vaga:</th>
+					<th scope="col">Descrição:</th>
+					<th scope="col">Salário:</th>
+					<th scope="col">Expira:</th>
+					<th scope="col"></th>
+					<th scope="col">Ações:</th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${listarVagas.empty}">
+					<td colspan="2">Sem vagas cadastradas</td>
+				</tr>
+				<tr th:each="vaga : ${listarVagas}">
+					<td><span th:text="${vaga.nome}"></span></td>
+					<td><span th:text="${vaga.descricao}"></span></td>
+					<td>R$ <span th:text="${vaga.salario}"></span></td>
+					<td><span th:text="${vaga.data}"></span></td>
+					<td>
+						<form th:action="@{/vagas/deletar/{codigo}(codigo=${vaga.codigo})}" method="post" style="display:inline">
+						<button type="submit" class="btn btn-danger">Excluir</button>
+					</td>
+					<td><button type="button" class="btn btn-primary">Editar</button></td>
+					<td><button type="button" class="btn btn-success">Adicionar candidato</button></td>
+				</tr>
+			</tbody>
+		</table>
+
+
+		<div style="height: 100px;"></div>
+
+		<div class="footer-copyright fixed-bottom bg-dark text-center py-3">
+			<span class="text-light align-middle">| App RH - UC 12 | - ©
+				2022 Copyright: CTM Supervisão de Educação Online</span>
+		</div>
+
+</body>
+
+</html>

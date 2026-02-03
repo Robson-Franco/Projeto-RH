@@ -40,14 +40,14 @@ public class VagaController {
 			return "/vaga/cadastrarVaga";
 		}
 		vagaRepository.save(vaga);
-		attributes.addFlashAttribute("mensagem", "Vaga cadastrada com sucesso!");
+		attributes.addFlashAttribute("success", "Vaga cadastrada com sucesso!");
 		return "redirect:/vagas/cadastrar";
 	}
 	
 	@GetMapping("/listar")
 	public String listarVagas(Model model){
-		model.addAttribute("ListarVagas",vagaRepository.findAll());
-		return "vaga/listarVaga";
+		model.addAttribute("listarVagas",vagaRepository.findAll());
+		return "vaga/listarVagas";
 	}
 	
 	@GetMapping("/editar/{codigo}")
@@ -64,17 +64,18 @@ public class VagaController {
 		
 		
 	}
-	@GetMapping("/deletar/{codigo}")
+	@PostMapping("/deletar/{codigo}")
 	public String deletarVaga(@PathVariable("codigo") long codigo, RedirectAttributes attributes) {
 		Optional<Vaga> vagaBase = vagaRepository.findByCodigo(codigo);
 		if(!vagaBase.isPresent()) {
-			attributes.addFlashAttribute("mensagem","Código inválido: "+codigo);
-			return "redirect:vaga/listarVaga";
+			attributes.addFlashAttribute("warning","Falha ao deletar, código inexistente.");
+			return "redirect:/vagas/listar";
 		}
 		
 		Vaga vagaPresent = vagaBase.get();
 		vagaRepository.delete(vagaPresent);
-		return "redirect:vaga/listarVaga";
+		attributes.addFlashAttribute("success", "Vaga deletada com sucesso!");
+		return "redirect:/vagas/listar";
 		
 	}
 	

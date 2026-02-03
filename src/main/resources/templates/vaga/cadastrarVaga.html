@@ -22,9 +22,9 @@
 	<div class="container">
 
 		<h1>Cadastrar vaga</h1>
-		<div class="alert alert-success alert-dismissible fade show" th:if="${mensagem}">
+		<div class="alert alert-success alert-dismissible fade show" th:if="${success}">
 			<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-			<span th:text="${mensagem}"></span>
+			<span th:text="${success}"></span>
 		</div>
 		<form action="#" th:action="@{/vagas/salvar}" th:object="${vaga}" method="post">
 
