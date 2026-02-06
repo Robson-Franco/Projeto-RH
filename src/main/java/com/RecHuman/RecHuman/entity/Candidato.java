@@ -32,7 +32,7 @@ public class Candidato implements Serializable {
 	private String endereco;
 	
 	@NotEmpty
-	private int idade;
+	private String nascimento;
 	
 	@ManyToOne
 	private Vaga vaga;
@@ -77,12 +77,12 @@ public class Candidato implements Serializable {
 		this.endereco = endereco;
 	}
 
-	public int getIdade() {
-		return idade;
+	public String getNascimento() {
+		return nascimento;
 	}
 
-	public void setIdade(int idade) {
-		this.idade = idade;
+	public void setNascimento(String nascimento) {
+		this.nascimento = nascimento;
 	}
 
 	public Vaga getVaga() {

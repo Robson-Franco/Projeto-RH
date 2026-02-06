@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang=”pt-br” xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>| RecHuman |</title>
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet" th:href="@{/bootstrap-5.3.3-dist/css/bootstrap.min.css}">
+	<script th:src="@{/jquery-3.7.1.min.js}"></script>
+	<script th:src="@{/bootstrap-5.3.3-dist/js/bootstrap.min.js}"></script>
+
+
+</head>
+
+
+
+<body>
+
+	<div th:insert="fragments/publica-nave :: barSuperior"></div>
+	<div class="container">
+
+		<h1>Cadastrar Candidato</h1>
+		<div class="alert alert-success alert-dismissible fade show" th:if="${success}">
+			<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+			<span th:text="${success}"></span>
+		</div>
+		<form action="#" th:action="@{/candidatos/salvar}" th:object="${candidato}" method="post">
+
+
+			<div class="form-group">
+				<label for=""><b>Nome do Candidato:</b> </label> <input type="text" class="form-control"
+					placeholder="Insira o nome do cargo" th:field="*{nomeCandidato}" required> <small class="form-text text-muted"><i>*
+						Nome completo do participante.</i></small>
+			</div>
+
+			<div class="row">
+				<div class="col">
+
+					<div class="form-group">
+						<label for=""><b>RG:</b></label> <input type="number" pattern="^\d+(\.|\,)\d{2}$" th:field="*{rg}"
+							class="form-control" required /> <small class="form-text text-muted"><i>* Documento de identidade emitido no Brasil, apenas numeros troque X POR 0.</i></small>
+					</div>
+				</div>
+				<div class="col">
+
+					<div class="form-group">
+						<label for=""><b>Data de nascimento:</b></label> <input type="date" th:field="*{nascimento}"
+							class="form-control" required />
+					</div>
+				</div>
+			</div>
+				<div class="col">
+					<div class="form-group">
+						<label for=""><b>E-mail:</b></label><input type="text" th:field="*{email}" class="form-control" required /> <small
+							class="form-text text-muted"><i>* Utilize um e-mail válido.</i></small>
+					</div>
+
+				</div>
+				<div class="col">
+					<div class="form-group">
+						<label for=""><b>Endereço:</b></label><input type="text" th:field="*{endereco}" class="form-control" required /> <small
+							class="form-text text-muted"><i>* Forneça o endereço residencial.</i></small>
+					</div>
+
+				</div>
+			
+
+			<button type="submit" class="btn btn-success">Adicionar Candidato</button>
+
+		</form>
+
+	</div>
+
+
+	<div style="height: 100px;"></div>
+
+	<div class="footer-copyright fixed-bottom bg-dark text-center py-3">
+		<span class="text-light align-middle">| App RH - UC 12 | - ©
+			2022 Copyright: CTM Supervisão de Educação Online</span>
+	</div>
+
+
+</body>
+
+</html>
